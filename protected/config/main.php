@@ -129,9 +129,9 @@ return array(
 		
 		//七牛配置
 		'domain'	=>	'qiniudn.com',		//七牛域名
-		'bucket'	=>	'wansun-iblog',		//七牛空间名
-		'accessKey'	=>	'RRWXj222j-jFGyxn2h0RpOWunHiMApM-stHOo7b8',
-		'secretKey' =>	'kmnZ2X8JomE89Ak60pA7FNgkPm4rYTO6GSsy9Xn_',
+		'bucket'	=>	'your bucket',		//七牛空间名
+		'accessKey'	=>	'your key',
+		'secretKey' =>	'your key',
 	
 		//七牛图片处理配置
 		'smallImageWidth'	=>	'120',
@@ -147,8 +147,8 @@ return array(
 
 		//邮箱账号
 		'smtpserver'		=>	'smtp.sina.com',
-		'smtpuser'			=>	'zhuwanxiong@sina.com',
-		'smtppassword'		=>	'smileatlife2010',
+		'smtpuser'			=>	'',
+		'smtppassword'		=>	'',
 
 		//使用用户自定义的head信息的页面
 		'defaultheadpage'	=>	'm,t,search,contact',
