@@ -1,0 +1,20 @@
+.backToTop {
+    display: none;
+    padding: 15px;
+    /*background-color: #000;*/
+	width:40px;
+	background-color:#E61736;
+    color: #fff;
+    font-size: 15px;
+    text-align: center;
+	-webkit-transform: translateZ(0);
+    position: fixed;
+    _position: absolute;
+    right: 10px;
+    bottom: 100px;
+    _bottom: "auto";
+    cursor: pointer;
+	border-radius:45px;
+    /*opacity: .6;*/
+    /*filter: Alpha(opacity=60);*/
+}
