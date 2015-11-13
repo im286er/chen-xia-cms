@@ -1,5 +1,5 @@
 # ASimpleCMS
-Sample site goto http://www.return1.cn/we
+Sample site goto http://www.return1.cn/
 # Produce
 Yii框架开发的一套简单cms，发布系统搭载百度开源Ueditor，用户首页DIY带单、背景以及嵌入了流畅ckplayer播发器，内容项的展出采用了完美的瀑布流响应式设计，内容页设计了简约的吐槽功能，文件、音乐、视频托管到七牛云存储。
 
