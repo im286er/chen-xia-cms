@@ -2,24 +2,14 @@
 <div class="title"><h2>菜单管理</h2></div>
 <div class="maincon">
 
-<!-- <div><a style="margin:10px;color:#FF6600;font-size:15px;margin-bottom:10px;display:block;width:100;" href="<?php echo $this->createUrl('/admin/admin/addmenu',array('pid'=>0)); ?>">添加菜单</a></div> -->
+<div><a style="margin:10px;font-size:15px;margin-bottom:10px;display:block;width:100;" href="<?php echo $this->createUrl('/admin/admin/addmenu',array('pid'=>0)); ?>">添加菜单</a></div>
 	<table class="tablelist" width="100%">
-		<!-- 
-		<tr>
-			<td colspan=7 style="border:0">
-				<div style="width:100%;height:30px;border:1px solid #FFD0B1;line-height:30px;text-align:center;background-color:#FFF2EA;color:#FF6600;">
-				注意：菜单从首页依次从1开始排序，从左到右依次对应首页顶部的菜单。
-				</div>
-			</td>
-		</tr>
-		 -->
 		<tr>
 			<td colspan=6 style='border:0;'>
 			<?php 
 				if(Yii::app()->user->hasFlash('deletestatus')){
 					echo Yii::app()->user->getFlash('deletestatus');
 				}
-				
 			?>
 			</td>
 		</tr>

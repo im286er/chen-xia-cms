@@ -51,10 +51,11 @@
 				</div>
 			</td>
 		</tr>
+		<!--
 		<tr>
 			<td width="180px" align="right"></td>
 			<td colspan="3">
-				<div class="stext"><!-- <input type="text" name="" value="" id="" /> -->
+				<div class="stext">
 				<span>标题颜色：</span>
 				<?php echo $form->textField($editModel,'titlecolor',array('id'=>'color_a','class'=>'input_cxcolor')); ?>
 				<?php echo $form->error($editModel,'titlecolor',array('class'=>'errorstyle')); ?>
@@ -64,13 +65,14 @@
 		<tr>
 			<td width="180px" align="right"></td>
 			<td colspan="3">
-				<div class="stext"><!-- <input type="text" name="" value="" id="" /> -->
+				<div class="stext">
 				<span>内容颜色：</span>
 				<?php echo $form->textField($editModel,'contentcolor',array('id'=>'color_b','class'=>'input_cxcolor')); ?>
 				<?php echo $form->error($editModel,'contentcolor',array('class'=>'errorstyle')); ?>
 				</div>
 			</td>
 		</tr>
+		-->
 		<tr>
 			<td width="180px" align="right"></td>
 			<td colspan="2">

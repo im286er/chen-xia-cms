@@ -23,6 +23,15 @@ $(function(){
 	$(".cutthumbbutton").live('click',function(){
 		$(this).parent().remove();
 	});
+	
+	//radio type
+	$(".blogtype").find("input:radio").live("click",function(){
+		if($(this).val() == 2){
+			$(".linkurl").hide();
+		} else {
+			$(".linkurl").show();
+		}
+	})
 });
 </script>
 <style type="text/css">
@@ -42,9 +51,13 @@ $(function(){
 				<?php echo $form->textField($blogModel,'title'); ?>
 				<?php echo $form->error($blogModel,'title',array('id'=>'errorfield')); ?>
 				</div>
-				<div class="append">
-					<?php echo $form->radioButtonList($blogModel,'type',array('1'=>'热门','2'=>'普通'),array('separator'=>'&nbsp;&nbsp')); ?>
+				<div class="append blogtype">
+					<?php echo $form->radioButtonList($blogModel,'type',array('2'=>'普通','3'=>'视频'),array('separator'=>'&nbsp;&nbsp')); ?>
 					<?php echo $form->error($blogModel,'type',array('id'=>'errorfield')); ?>
+				</div>
+				<div class="stext linkurl" style="display:none;" title="视频URL">
+				<?php echo $form->textField($blogModel,'videolink'); ?>
+				<?php echo $form->error($blogModel,'videolink',array('id'=>'errorfield')); ?>
 				</div>
 			</td>
 		</tr>

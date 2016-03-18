@@ -3,9 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
-<meta name="keywords" content="A Simple CMS , Do Anything . Just Do What You Want To Do . 你不是一个很好的记录者，从现在起，尝试着勇敢的做自己。每天发现新的自己！" />
-<meta name="description" content="快节奏的生活常常让我们迷失了自己，我们忙于学习，参加各类培训考试；忙于工作，争取升职加薪；忙着充实，忙着把自己的理想变为现实。我们从太阳刚刚冒出脑袋的清晨出发，忙到傍晚家家都已灯火阑珊时才归来。竞争越来越大，往前走的步伐也是愈迈愈快。很少有时间静下心来思考。我是谁？我到底想要什么？是不是曾忽略了父母双鬓渐渐增多的白发？是不是少有机会跟老朋友分享聊天？是不是偶尔也会孤独，颇有朱自清笔下那般“热闹是他们的，而我什么也没有“的落寞？是不是觉得自己怀才不遇，满腹委屈，甚至想过放弃？其实，所有这一切皆因我们在自我追求的路上走的过于心急。我们需要一个安静的空间和地点来审视自己。A Simple CMS是个驿站，在这里，你可以毫无顾虑的用心和自己对话，释放压力，轻装上阵。当脚步放慢了，心态平和了，你会发现生活并没有我们想象得那般糟糕！也许你不是一个很好的记录者，从现在起，尝试着勇敢的做自己！" />
-<title>A Simple CMS , Do Anything .</title>
+<meta name="keywords" content="粉控,粉丝,明星动态" />
+<meta name="description" content="触碰时尚,感受潮流,周知明星动态"/>
+<title>粉控，we are fans</title>
 <link rel="Shortcut Icon" href="http://wansun-iblog.qiniudn.com/ws_icon-dribbble-color.png" />
 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/assets/index/js/jquery-1.8.2.min.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/assets/index/layer/layer.min.js"></script>
@@ -95,7 +95,7 @@ $(function(){
 		}
 
 		//提示信息
-		layer.tips('here，我在这儿。', "."+tmp,{time: 0,guide:0,style: ['background-color:black;color:white;','black']});
+		layer.tips("Hi,I'M HERE", "."+tmp,{time: 0,guide:0,style: ['background-color:black;color:white;','black']});
 		
 	});
 
@@ -142,10 +142,6 @@ $(function(){
 </script>
 </head>
 <body>
-<div style="display:none;">A Simple CMS，为爱编辑的你而生。</div>
-<div style="display:none;" class="description">
-快节奏的生活常常让我们迷失了自己，我们忙于学习，参加各类培训考试；忙于工作，争取升职加薪；忙着充实，忙着把自己的理想变为现实。我们从太阳刚刚冒出脑袋的清晨出发，忙到傍晚家家都已灯火阑珊时才归来。竞争越来越大，往前走的步伐也是愈迈愈快。很少有时间静下心来思考。我是谁？我到底想要什么？是不是曾忽略了父母双鬓渐渐增多的白发？是不是少有机会跟老朋友分享聊天？是不是偶尔也会孤独，颇有朱自清笔下那般“热闹是他们的，而我什么也没有“的落寞？是不是觉得自己怀才不遇，满腹委屈，甚至想过放弃？其实，所有这一切皆因我们在自我追求的路上走的过于心急。我们需要一个安静的空间和地点来审视自己。A Simple CMS是个驿站，在这里，你可以毫无顾虑的用心和自己对话，释放压力，轻装上阵。当脚步放慢了，心态平和了，你会发现生活并没有我们想象得那般糟糕！也许你不是一个很好的记录者，从现在起，尝试着勇敢的做自己！
-</div>
 <!-- 登录框 -->
 <div class="loginmask"></div>
 <div id="loginalert">
@@ -216,7 +212,7 @@ $(function(){
 <div class="maincontent">
 <?php foreach ($users as $u): ?>
 	<?php if(!empty($u['headpicture'])): ?>
-		<div class="userhead <?php echo $u['username']; ?>"><a  name="<?php echo $u['username']; ?>" id="<?php echo $u['username']; ?>" href="<?php echo $this->createUrl("/index/m",array('who'=>$u['id'])); ?>" ><img src="<?php echo $url.$u['headpicture']; ?>"></a></div>
+		<div class="userhead <?php echo $u['truename']; ?>"><a  name="<?php echo $u['truename']; ?>" id="<?php echo $u['truename']; ?>" href="<?php echo $this->createUrl("/index/m",array('who'=>$u['id'])); ?>" ><img title="<?php echo $u['truename']; ?>" src="<?php echo $url.$u['headpicture']; ?>"></a></div>
 	<?php endif; ?>
 <?php endforeach; ?>
 </div>

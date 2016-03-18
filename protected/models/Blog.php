@@ -31,13 +31,14 @@
 		public $title;
 		public $view;
 		public $image;
+		public $videolink;
 		public $readaccess;
 		
 		public function rules(){
 			
 			return array(
 				array('title','required','message'=>'标题必填'),
-				array('type','in','range'=>array(1,2),'message'=>'请选择类型'),
+				array('type','in','range'=>array(1,2,3),'message'=>'请选择类型'),
 				array('readaccess','in','range'=>array(0,1),'message'=>'请设置阅读权限'),
 				array('labelid','check_label'),
 				array('content','safe'),
@@ -45,12 +46,10 @@
 				array('time','safe'),
 				array('userid','safe'),
 				array('image','safe'),
-				
+				array('videolink','safe'),
 			);
 		}
 		
-		
-		//检查标签合法性
 		public function check_label(){
 			if($this->labelid <= 0){
 				$this->addError('labelid', "请选择标签");

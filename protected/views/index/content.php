@@ -1,30 +1,86 @@
-<div style="clear:both;"></div>
-<?php if(!empty($blogInfo)):?>
-	<?php foreach ($blogInfo as $key=>$b): ?>
-		<title><?php echo $b['title']?></title>
-		<meta name="keywords" content="<?php echo $b['title']; ?>"/>
-		<meta name="description" content="<?php echo strip_tags($b['content']); ?>"/>
-	<?php endforeach;?>
-<?php endif;?>
-<!-- 返回顶部 -->
-<link rel='stylesheet' href='<?php echo Yii::app()->request->baseUrl; ?>/assets/index/css/GOTOP.css' type='text/css' />
-<script type='text/javascript' language='javascript' src='<?php echo Yii::app()->request->baseUrl; ?>/assets/index/js/GOTOP.js'></script>
-<div id="main" class="clearfix" style="width:100%;">
-<style>
-#content {width:100%;border:0px solid red;float:left;background-color:white;}
-.post .frame {
-    float: left;
-    width: auto;
-    padding: 30px 30px 15px 30px;
-    border: solid 1px #e7e7e7;
-    border-bottom: none;
-    background: #fff;
-}
+<?php 
+	//获取菜单及各项公共配置
+	$menuModel = new Blog();
+	$menuInfo  = $menuModel->common($this->uid);
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="<?php echo $blogInfo[0]['title']; ?>"/>
+<meta name="description" content="<?php echo ""; ?>"/>
+<title><?php echo $blogInfo[0]['title'];?></title>
+<link rel="Shortcut Icon" href="<?php echo $menuInfo['webconfig']['icon']; ?>" />
+<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/assets/index/css/iblog.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/assets/index/css/gotop.css" type="text/css" media="screen" />
+<link href='<?php echo Yii::app()->request->baseUrl; ?>/assets/index/css/e_style.css' rel='stylesheet' type='text/css' />
+<script type='text/javascript' src='<?php echo Yii::app()->request->baseUrl; ?>/assets/index/js/jquery-1.8.2.min.js'></script>	
+<script type='text/javascript' src='<?php echo Yii::app()->request->baseUrl; ?>/assets/index/js/gotop.js'></script>	
+<style type="text/css">
+.thisismyplayerdiv{position:fixed;width:600px;height:450px;margin-left:400px;margin-top:120px;border:0px solid red;}
+#closemv{margin-left:580px;position:absolute;z-index:2222;margin-top:-477px;width:27px;height:27px;background:url('<?php echo Yii::app()->request->baseUrl; ?>/assets/index/images/red-close-btn.gif');-webkit-transform: translateZ(0);}	
+body{background: url('<?php  echo Yii::app()->session['ws_backgroundofuser'];  ?>') no-repeat fixed top;);}
+#content {width:100%;border:0px solid red;float:left;background:#eee;}
+.post .frame {float: left;width: auto;padding: 30px 30px 15px 30px;border: solid 0px #e7e7e7;border-bottom: none;}
 #respond{width:1080px;border:0px solid red;}
-.mainresponsebtn{margin-left:20px;width:150px;height:28px;border:0;color:#333333;background-color:#F7F7F7;border-radius:5px;}
-.submitcommentbtn:hover,.mainresponsebtn:hover{color:#5ABFEA;}
-.comment{width:50%;}
+.mainresponsebtn,.submitcommentbtn{margin-left: 20px;width: 60px;height: 35px;border: 0;color: #333333;background-color: #F7F7F7;border-radius: 5px;border-radius: 35px;font-size: 14px;color: white;background-color: black;}
+.comment{width:100%;}
 </style>
+<script type="text/javascript">
+$(function(){
+/*设置播放器位置 默认中间位置*/
+var width = window.screen.width - 20 - 600;	
+$(".thisismyplayerdiv").css({"margin-left":(width/2+70)+"px"});
+});
+</script>
+</head>
+<body class="archive category category-photography category-15">
+<!-- ckplayer播放器begin -->
+<div class="thisismyplayerdiv">
+<div id="videoplayer"></div>
+<div id="closemv"></div>
+</div>
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/assets/index/ckplayer/ckplayer.js" charset="utf-8"></script>
+<script type="text/javascript">
+var mvurl;
+$(function(){
+$(".mymv").click(function(){
+	//var content = $("#playerdiv").clone();
+	mvurl   = $(this).find('.mvid').val();
+	//设置播放器的z-index
+	$(".thisismyplayerdiv").css({"z-index":"22"});
+	//mv地址
+	mvurl = "<?php echo $menuInfo['url']; ?>"+mvurl;
+	$(".thisismyplayerdiv").fadeIn(500);
+	var flashvars={f:mvurl, c:0, b:1};
+	var params={bgcolor:'#FFF',allowFullScreen:true,allowScriptAccess:'always'};
+	CKobject.embedSWF('<?php echo Yii::app()->request->baseUrl; ?>/assets/index/ckplayer/ckplayer.swf','videoplayer','ckplayer_a1','600','450',flashvars,params);
+	/*
+	CKobject.embedSWF(播放器路径,容器id,播放器id/name,播放器宽,播放器高,flashvars的值,其它定义也可省略);
+	下面三行是调用html5播放器用到的
+	*/
+	swfobject.embedSWF('<?php echo Yii::app()->request->baseUrl; ?>/assets/index/ckplayer/ckplayer.swf', 'videoplayer', '600', '400', '10.0.0','<?php echo Yii::app()->request->baseUrl; ?>/assets/index/ckplayer/ckplayer.swf', flashvars, params, attributes);
+	var video=['http://movie.ks.js.cn/flv/other/1_0.mp4->video/mp4','http://www.ckplayer.com/webm/0.webm->video/webm','http://www.ckplayer.com/webm/0.ogv->video/ogg'];
+	var support=['iPad','iPhone','ios','android+false','msie10+false'];
+	CKobject.embedHTML5('video','ckplayer_a1',600,450,video,flashvars,support);
+});
+
+//关闭播放器
+$("#closemv").live("click",function(){
+	//设置播放器的z-index为0
+	$(".thisismyplayerdiv").css({"z-index":"0"});
+	icontents = $(this).parent().children().clone();
+	iparent = $(this).parent();
+	$(this).parent().hide(300,function(){
+		iparent.children().remove();
+		iparent.empty().append(icontents);
+	});
+});
+});
+</script>
+<!-- ckplayer播放器end -->
+<div id="wrapper" class="clearfix">
+<div id="main" class="clearfix">
 <?php foreach ($blogInfo as $key=>$b): ?>
 	<div id="content" class="filter-posts">
 		<!-- grab the posts -->		
@@ -32,24 +88,25 @@
 				<div class="box">
 					<div class="shadow clearfix">
 					<div class="frame" style="margin-bottom: -12px;">
-							<h2 class="entry-title"><a href="#" title=""><?php echo $b['title']; ?></a></h2>
-							
+							<!--
+							<h2 class="entry-title" style="text-align:center;"><a href="#" title=""><?php echo $b['title']; ?></a></h2>
+							-->
 							<div class="okvideo"></div>	
 							<p><?php echo $b['content']; ?></p>
-						</div><!-- frame -->
-						</div><!-- shadow -->
-					</div><!-- box -->
-				</div><!--writing post-->
-<link href='<?php echo Yii::app()->request->baseUrl; ?>/assets/index/css/e_style.css' rel='stylesheet' type='text/css' />
-<div class="bdsharebuttonbox" style="margin-left:30px;"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+					</div><!-- frame -->
+					</div><!-- shadow -->
+				</div><!-- box -->
+			</div><!--writing post-->
+<div class="bdsharebuttonbox" style="margin-left:30px;">
+<a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+</div>
 <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<div style="margin-left:30px;margin-top:10px;"><span>--</span>&nbsp;[<a href="<?php echo $category; ?>">分类</a>]&nbsp;&nbsp;&nbsp;[<a href="<?php echo $music; ?>">音乐</a>]&nbsp;&nbsp;&nbsp;[<a href="<?php echo $message; ?>">私信</a>]</div>
 <div class='commentscontainer'>
      <div class="comments" id="lookcontent">
-     <h3><span class='totalcount'><?php echo $total; ?></span>条评论<button type="button" class="mainresponsebtn">我要评论</button></h3>
-      <?php 
-      		echo $comments;
-      ?>
-      </div>  
+		<h3><span class='totalcount'>&nbsp;<?php echo $total; ?></span>条评论<button type="button" class="mainresponsebtn">评论</button></h3>
+		<?php echo $comments;?>
+     </div>  
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/assets/index/js/jquery-1.8.2.min.js"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/assets/index/layer/layer.min.js"></script>
 	<script type="text/javascript">
@@ -64,8 +121,6 @@
 	var BlogId = "<?php foreach ($blogInfo as $bi){echo $bi['bid'];} ?>";
 	var ParentId;
 	var Content;
-
-
 	var index;
 	var reply;
 	//弹出评论框  主评论时关掉所有子评论框
@@ -79,13 +134,13 @@
 	        title: true, //不显示默认标题栏
 	        shade: [0],  //不显示遮罩
 	        area: ['600px', '300px'],
-	        page: {html: '<div style="padding:20px;font-family:微软雅黑;"><h3>评论内容</h3><div><textarea class="responsecontent" style="width:550px;height:160px;border-radius:5px;resize:none;"></textarea><button style="margin-top:20px;float:right;width:70px;height:27px;border:0px;background-color:#EAEAEA;border-radius:5px;" class="submitcommentbtn" type="submit">提交</button></div></div>'}
+	        page: {html: '<div style="padding:20px;font-family:微软雅黑;"><h3>评论内容</h3><div><textarea class="responsecontent" style="width:550px;height:160px;border-radius:5px;resize:none;"></textarea><button style="margin-top:20px;float:right;" class="submitcommentbtn" type="submit">提交</button></div></div>'}
 	    });
 	});
 	
 	//2.子评论
 	$('.responsetarget').on('click', function(){
-		ParentId = $(this).parent().parent().find(".parentid").val();
+		ParentId = $(this).parent().find(".parentid").val();
 		reply    = 1;
 		layer.closeAll();//关闭当前打开窗口
 	    index = $.layer({
@@ -93,7 +148,7 @@
 	        title: true, //不显示默认标题栏
 	        shade: [0],  //不显示遮罩
 	        area: ['600px', '300px'],
-	        page: {html: '<div style="padding:20px;font-family:微软雅黑;"><h3>评论内容</h3><div><textarea class="responsecontent" style="width:550px;height:160px;border-radius:5px;resize:none;"></textarea><button style="margin-top:20px;float:right;width:70px;height:27px;border:0px;background-color:#EAEAEA;border-radius:5px;" class="submitcommentbtn" type="submit">提交</button></div></div>'}
+	        page: {html: '<div style="padding:20px;font-family:微软雅黑;"><h3>评论内容</h3><div><textarea class="responsecontent" style="width:550px;height:160px;border-radius:5px;resize:none;"></textarea><button style="margin-top:20px;float:right;" class="submitcommentbtn" type="submit">提交</button></div></div>'}
 	    });
 	});
 
@@ -106,18 +161,13 @@
 		}
 		$.ajax({
 			url: "<?php echo $this->createUrl('/index/AddComment'); ?>", 
-
 			type: 'POST', 
-
 			data:{blogid:BlogId,parentid:ParentId,content:Content,replytype:reply}, 
-
 			dataType: 'text', 
-
 			timeout: 5000, 
-
-			error: function(){layer.msg("服务器忙，请稍后...", 2, -1);layer.close(index);}, 
-
+			error: function(result){ layer.msg("服务器忙，请稍后...", 2, -1);/*alert(console.log(result));*/layer.close(index);}, 
 			success: function(result){
+				//alert(result);
 				if(result != "fail"){
 					var resobj = eval("("+result+")");
 					var pid  = resobj['pid'];
@@ -146,12 +196,8 @@
 								return false;	//跳出循环
 							}	
 						});
-						var padding = $(tmpobj).css("padding-left");
-						padding = padding.split("px");
-						padding = padding[0];
-						padding = (parseInt(padding)+50)+"px";
+						
 						$(tmpobj).after(text);
-						$(tmpobj).next(".comment").css("padding-left",padding);
 					}
 
 					//增加评论数量
@@ -163,15 +209,10 @@
 				}
 				if(result == "fail"){
 					layer.msg("服务器忙，请稍后...", 2, -1);
-					
 				}
 			} 
-
 		});
-
-		
 	});
-
 	//随鼠标显示回复按钮
 	$(".comment").live("mouseenter",function(){
 		$(this).find(".responsetarget").show();
@@ -181,10 +222,11 @@
 	});
 	
 	</script>
-      </div>
-
+    </div>
 	</div><!--content-->
 	<?php endforeach; ?>			
 	<div class="push" style="clear:both;height:50px;"></div>
 </div><!--main-->
-	
+</div><!-- wrapper -->
+</body>
+</html>

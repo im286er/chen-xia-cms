@@ -2,23 +2,23 @@
 
 class resizeimage
 {
-    //Í¼Æ¬ÀàÐÍ
+    //å›¾ç‰‡ç±»åž‹
     var $type;
-    //Êµ¼Ê¿í¶È
+    //å®žé™…å®½åº¦
     var $width;
-    //Êµ¼Ê¸ß¶È
+    //å®žé™…é«˜åº¦
     var $height;
-    //¸Ä±äºóµÄ¿í¶È
+    //æ”¹å˜åŽçš„å®½åº¦
     var $resize_width;
-    //¸Ä±äºóµÄ¸ß¶È
+    //æ”¹å˜åŽçš„é«˜åº¦
     var $resize_height;
-    //ÊÇ·ñ²ÃÍ¼
+    //æ˜¯å¦è£å›¾
     var $cut;
-    //Ô´Í¼Ïó
+    //æºå›¾è±¡
     var $srcimg;
-    //Ä¿±êÍ¼ÏóµØÖ·
+    //ç›®æ ‡å›¾è±¡åœ°å€
     var $dstimg;
-    //ÁÙÊ±´´½¨µÄÍ¼Ïó
+    //ä¸´æ—¶åˆ›å»ºçš„å›¾è±¡
     var $im;
     function resizeimage($img, $wid, $hei,$c,$dstpath)
     {
@@ -26,37 +26,37 @@ class resizeimage
         $this->resize_width = $wid;
         $this->resize_height = $hei;
         $this->cut = $c;
-        //Í¼Æ¬µÄÀàÐÍ
+        //å›¾ç‰‡çš„ç±»åž‹
         $this->type = strtolower(substr(strrchr($this->srcimg,"."),1));
-        //³õÊ¼»¯Í¼Ïó
+        //åˆå§‹åŒ–å›¾è±¡
         $this->initi_img();
-        //Ä¿±êÍ¼ÏóµØÖ·
+        //ç›®æ ‡å›¾è±¡åœ°å€
         $this -> dst_img($dstpath);
         //--
         $this->width = imagesx($this->im);
         $this->height = imagesy($this->im);
-        //Éú³ÉÍ¼Ïó
+        //ç”Ÿæˆå›¾è±¡
         $this->newimg();
         ImageDestroy ($this->im);
     }
     function newimg()
     {
-        //¸Ä±äºóµÄÍ¼ÏóµÄ±ÈÀý
+        //æ”¹å˜åŽçš„å›¾è±¡çš„æ¯”ä¾‹
         $resize_ratio = ($this->resize_width)/($this->resize_height);
-        //Êµ¼ÊÍ¼ÏóµÄ±ÈÀý
+        //å®žé™…å›¾è±¡çš„æ¯”ä¾‹
         $ratio = ($this->width)/($this->height);
         if(($this->cut)=="1")
-        //²ÃÍ¼
+        //è£å›¾
         {
             if($ratio>=$resize_ratio)
-            //¸ß¶ÈÓÅÏÈ
+            //é«˜åº¦ä¼˜å…ˆ
             {
                 $newimg = imagecreatetruecolor($this->resize_width,$this->resize_height);
                 imagecopyresampled($newimg, $this->im, 0, 0, 0, 0, $this->resize_width,$this->resize_height, (($this->height)*$resize_ratio), $this->height);
                 ImageJpeg ($newimg,$this->dstimg);
             }
             if($ratio<$resize_ratio)
-            //¿í¶ÈÓÅÏÈ
+            //å®½åº¦ä¼˜å…ˆ
             {
                 $newimg = imagecreatetruecolor($this->resize_width,$this->resize_height);
                 imagecopyresampled($newimg, $this->im, 0, 0, 0, 0, $this->resize_width, $this->resize_height, $this->width, (($this->width)/$resize_ratio));
@@ -64,7 +64,7 @@ class resizeimage
             }
         }
         else
-        //²»²ÃÍ¼
+        //ä¸è£å›¾
         {
             if($ratio>=$resize_ratio)
             {
@@ -80,7 +80,7 @@ class resizeimage
             }
         }
     }
-    //³õÊ¼»¯Í¼Ïó
+    //åˆå§‹åŒ–å›¾è±¡
     function initi_img()
     {
         if($this->type=="jpg")
@@ -96,7 +96,7 @@ class resizeimage
             $this->im = imagecreatefrompng($this->srcimg);
         }
     }
-    //Í¼ÏóÄ¿±êµØÖ·
+    //å›¾è±¡ç›®æ ‡åœ°å€
     function dst_img($dstpath)
     {
         $full_length  = strlen($this->srcimg);
@@ -108,7 +108,7 @@ class resizeimage
     }
 }
 
-//µ÷ÓÃ·½·¨
+//è°ƒç”¨æ–¹æ³•
 //$resizeimage = new resizeimage("1.jpg", "320", "240", "1","2.jpg");
 
 ?>

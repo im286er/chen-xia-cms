@@ -1,7 +1,7 @@
 
 
 /* ============================ START COMMENTS ============================ */
-.commentscontainer{width:91%;background-color:white;margin-left:1px;clear:both;border:1px solid black;border-left:none;border-bottom:none;border-right:none;}
+.commentscontainer{width:91%;margin-left:1px;clear:both;border:0px solid black;border-left:none;border-bottom:none;border-right:none;}
 .comments {
 	margin-bottom:30px;
 	padding:30px 20px 5px 20px;
@@ -9,6 +9,9 @@
 }
 .comments .comment {
 	margin-bottom:30px;
+	font-size:14px;
+	color:black;
+	font-family:'宋体';
 }
 .comments .replay {
 	margin-bottom:30px;
@@ -81,7 +84,6 @@
 }
 .comments .commenttext {
 	padding:10px;
-	border-bottom:1px solid #7AAED5;
 	border-radius:0px;
 	width:auto;
 }

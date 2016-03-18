@@ -8,22 +8,25 @@
 a,img{border:0;}
 a{text-decoration:none;color:#535353;font-size:12px;font-family:"arial","微软雅黑";}
 body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
-
-
 #setp_quicklogin{width:90%;margin:0 auto;border:0px solid red;text-align:center;padding-top:100px;font-size:18pt;}
-.back_setp{width:100px;height:50px;line-height:50px;background:#8F8F90;color:#fff;cursor:pointer;font-size:22px;text-align:center;left:20px;top:20px;margin:20px;}
-.back_setp:hover{background-color:#6BC30D;}
+.back_setp{height:50px;width:200px;line-height:50px;text-align:center;background:#6BC30D;color:#fff;cursor:pointer;font-size:22px;text-align:center;left:20px;top:20px;margin:20px;}
 </style>
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/assets/index/js/jquery-1.8.2.min.js"></script>
 <script type="text/javascript">
-	function Direct(){
-		window.location.href = "<?php echo $this->createUrl($backup,$params); ?>";
+	var n = 6;
+	function showTime() {
+		n--;
+		$('#back_setp').html(n + ' 秒后关闭');
+		if (n == 0) 
+			window.close();
+		else
+			setTimeout('showTime()', 1000);
 	}
 </script>
 </head>
-<body>
-
+<body onload ="showTime()" >
 <div id="reg_setp">
-	<div class="back_setp" id="back_setp" onclick="return Direct()">返回</div>
+	<div class="back_setp" id="back_setp"></div>
 	<div id="setp_quicklogin">
 		<?php echo $message; ?>
 	</div>

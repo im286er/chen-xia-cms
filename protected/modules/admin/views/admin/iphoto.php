@@ -167,7 +167,7 @@
 		<span class='setbackground'>设置为背景</span>
 		<span class='deletebutton'>删除</span>
 		<input type="hidden" value="<?php echo $p->id; ?>" class='imageid'/>
-		<a class="example1" href="<?php echo $url.$p->picture;  ?>"><img alt="example1" src="<?php echo $url.$p->picture; ?>" class='imagestyle'/></a>
+		<a class="example1" href="<?php echo $url.$p->picture;  ?>"><img alt="example1" src="<?php echo $url.$p->picture."?imageView2/1/w/200/h/200"; ?>" class='imagestyle'/></a>
 	</div>
 <?php endforeach; ?>
 </p>

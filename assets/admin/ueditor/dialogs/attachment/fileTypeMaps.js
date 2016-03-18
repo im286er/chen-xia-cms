@@ -25,5 +25,7 @@ var fileTypeMaps = {
     ".rm":"icon_mv.gif",
     ".exe":"icon_exe.gif",
     ".psd":"icon_psd.gif",
-    ".txt":"icon_txt.gif"
+    ".txt":"icon_txt.gif",
+	".jpg":"icon_txt.gif",
+	".png":"icon_txt.gif"
 };

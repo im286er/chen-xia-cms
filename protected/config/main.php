@@ -70,12 +70,12 @@ return array(
 		
 		//数据库配置
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=iapp',
+			'connectionString' => 'mysql:host=host;dbname=dbname',
 			'emulatePrepare' => true,
-			'username' => '',
-			'password' => '',
+			'username' => 'username',
+			'password' => 'password',
 			'charset' => 'utf8',
-			'tablePrefix' => 'ws_',
+			'tablePrefix' => 'tablePrefix',
 			//开启调试
 			'enableParamLogging' => true,
 			
@@ -129,9 +129,9 @@ return array(
 		
 		//七牛配置
 		'domain'	=>	'qiniudn.com',		//七牛域名
-		'bucket'	=>	'your bucket',		//七牛空间名
-		'accessKey'	=>	'your key',
-		'secretKey' =>	'your key',
+		'bucket'	=>	'bucket',           //七牛空间名
+		'accessKey'	=>	'accessKey',
+		'secretKey' =>	'secretKey',
 	
 		//七牛图片处理配置
 		'smallImageWidth'	=>	'120',
@@ -147,8 +147,8 @@ return array(
 
 		//邮箱账号
 		'smtpserver'		=>	'smtp.sina.com',
-		'smtpuser'			=>	'',
-		'smtppassword'		=>	'',
+		'smtpuser'			=>	'xxxx@sina.com',
+		'smtppassword'		=>	'xxxxxxxxxxxxx',
 
 		//使用用户自定义的head信息的页面
 		'defaultheadpage'	=>	'm,t,search,contact',

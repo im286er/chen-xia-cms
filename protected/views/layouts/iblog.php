@@ -97,24 +97,22 @@ $("#closemv").live("click",function(){
 		<!-- header navigation menu -->
 		<div class="menu-header-container">
 		<ul id="menu-header" class="nav">
-<li id="menu-item-109" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-109"><a href="<?php echo $menuInfo['upmenu_1']['link'];?>" style="font-family:'幼圆';font-size:13px;"><?php echo $menuInfo['upmenu_1']['name'];?></a></li>
-<li id="menu-item-110" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-110"><a href="<?php echo $menuInfo['upmenu_2']['link'];?>" target="_blank" style="font-family:'幼圆';font-size:13px;"><?php echo $menuInfo['upmenu_2']['name'];?></a></li>
-<li id="menu-item-85" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-85"><a href="<?php echo $menuInfo['upmenu_3']['link'];?>" style="font-family:'幼圆';font-size:13px;"><?php echo $menuInfo['upmenu_3']['name'];?></a>
+<li id="menu-item-109" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-109"><a href="<?php echo $menuInfo['upmenu_1']['link'];?>" ><?php echo $menuInfo['upmenu_1']['name'];?></a></li>
+<li id="menu-item-110" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-110"><a href="<?php echo $menuInfo['upmenu_2']['link'];?>" target="_blank" ><?php echo $menuInfo['upmenu_2']['name'];?></a></li>
+<li id="menu-item-85" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-85"><a href="<?php echo $menuInfo['upmenu_3']['link'];?>" ><?php echo $menuInfo['upmenu_3']['name'];?></a>
 	<ul class="sub-menu">
-
 	<?php foreach ($menuInfo['uplistmenu_3'] as $key=>$uml):?>
-		<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a href="<?php echo $uml->link; ?>" target="_blank" style="font-family:'幼圆';font-size:13px;"><?php echo $uml->name; ?></a></li>
-		
+		<li id="" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36"><a href="<?php echo $uml->link; ?>" target="_blank" ><?php echo $uml->name; ?></a></li>
 	<?php endforeach; ?>
 	</ul>
 </li>
-<li id="menu-item-218" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-218"><a style="font-family:'幼圆';font-size:13px;" href="<?php echo $menuInfo['upmenu_4']['link'];?>" target="_blank"><?php echo $menuInfo['upmenu_4']['name'];?></a></li>
+<li id="menu-item-218" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-218"><a  href="<?php echo $menuInfo['upmenu_4']['link'];?>" target="_blank"><?php echo $menuInfo['upmenu_4']['name'];?></a></li>
 </ul></div>			
 		<ul class="style-switcher nav">
-			<li><a style="font-family:'幼圆';font-size:13px;" href="<?php echo $menuInfo['upmenu_5']['link'];?>" ><?php echo $menuInfo['upmenu_5']['name'];?></a>
+			<li><a  href="<?php echo $menuInfo['upmenu_5']['link'];?>" ><?php echo $menuInfo['upmenu_5']['name'];?></a>
 				<ul class="sub-menu">
 				<?php foreach ($menuInfo['mvlist'] as $key=>$mv): ?>
-					<li class='mymv'><input type="hidden" value="<?php echo $mv->mv; ?>" class='mvid' /><a href="#" style="font-family:'幼圆';font-size:12px;"><?php echo $mv->name; ?></a></li>
+					<li class='mymv'><input type="hidden" value="<?php echo $mv->mv; ?>" class='mvid' /><a href="#"><?php echo $mv->name; ?></a></li>
 				<?php endforeach; ?>
 				</ul>
 			</li>
@@ -151,12 +149,12 @@ $("#closemv").live("click",function(){
 <div id="footer" class="clearfix">
 <div class="frame">
 		<div class="bar">
-<p class="copyright"><a href="<?php echo $menuInfo['downmenu_1']['link'];?>" style="font-family:'幼圆';font-size:13px;font-weight:bold;"><?php echo $menuInfo['downmenu_1']['name'];?></a></p>
-<div class="menu-footer-container"><ul id="menu-footer" class="footernav"><li id="menu-item-29" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-29"><a style="font-family:'幼圆';font-size:13px;font-weight:bold;" href="<?php echo $menuInfo['downmenu_2']['link'];?>" target="_blank"><?php echo $menuInfo['downmenu_2']['name'];?></a></li>
-<li id="menu-item-30" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-30"><a href="<?php echo $menuInfo['downmenu_3']['link'];?>" target="_blank" style="font-family:'幼圆';font-size:13px;font-weight:bold;"><?php echo $menuInfo['downmenu_3']['name'];?></a></li>
-<li id="menu-item-31" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-31"><a href="<?php echo $menuInfo['downmenu_4']['link'];?>" target="_blank" style="font-family:'幼圆';font-size:13px;font-weight:bold;"><?php echo $menuInfo['downmenu_4']['name'];?></a></li>
-<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-32"><a href="<?php echo $menuInfo['downmenu_5']['link'];?>" target="_blank" style="font-family:'幼圆';font-size:13px;font-weight:bold;"><?php echo $menuInfo['downmenu_5']['name'];?></a></li>
-<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-33"><a target="_blank" href="<?php echo $menuInfo['downmenu_6']['link'];?>" style="font-family:'幼圆';font-size:13px;font-weight:bold;"><?php echo $menuInfo['downmenu_6']['name'];?></a></li>
+<p class="copyright"><a href="<?php echo $menuInfo['downmenu_1']['link'];?>" ><?php echo $menuInfo['downmenu_1']['name'];?></a></p>
+<div class="menu-footer-container"><ul id="menu-footer" class="footernav"><li id="menu-item-29" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-29"><a href="<?php echo $menuInfo['downmenu_2']['link'];?>" target="_blank"><?php echo $menuInfo['downmenu_2']['name'];?></a></li>
+<li id="menu-item-30" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-30"><a href="<?php echo $menuInfo['downmenu_3']['link'];?>" target="_blank" ><?php echo $menuInfo['downmenu_3']['name'];?></a></li>
+<li id="menu-item-31" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-31"><a href="<?php echo $menuInfo['downmenu_4']['link'];?>" target="_blank" ><?php echo $menuInfo['downmenu_4']['name'];?></a></li>
+<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-32"><a href="<?php echo $menuInfo['downmenu_5']['link'];?>" target="_blank" ><?php echo $menuInfo['downmenu_5']['name'];?></a></li>
+<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-33"><a target="_blank" href="<?php echo $menuInfo['downmenu_6']['link'];?>" ><?php echo $menuInfo['downmenu_6']['name'];?></a></li>
 </ul></div></div><!--bar-->
 	</div><!--frame-->
 </div><!--footer-->

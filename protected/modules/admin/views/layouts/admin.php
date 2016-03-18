@@ -21,7 +21,7 @@ var visitor = true;
 		<tr>
 			<td height="80" style='border-bottom:1px solid black;'>
 				<!--<img src="<?php echo Yii::app()->request->baseUrl; ?>/assets/admin/images/logo.gif"  alt="后台博客logo" class="logo" />-->
-				<span class='logo' style="font-weight:bold;font-size:35pt;color:black;font-family:'微软雅黑';">A Simple CMS . Do Anything . </span>
+				<span class='logo' style="font-weight:bold;font-size:35pt;color:black;font-family:'微软雅黑';">每天，遇见新的自己 . </span>
 				<div class="user">当前用户：<?php echo Yii::app()->user->name; ?>(<a href="<?php echo $this->createUrl('login/out'); ?>">退出登陆</a>)</div>
 			</td>
 		</tr>
@@ -33,7 +33,7 @@ var visitor = true;
 							<td width="200" id="frmtitle" valign="top">
 								<dl class="sort" id='fontstyle'>
 									<dt class="current">个人资料</dt>
-									<dd><a href="<?php echo $this->createUrl('admin/myinfo'); ?>" >基本信息</a><a href="<?php echo $this->createUrl('admin/editiface');?>">上传头像</a><!-- <a href="#">我的简历</a><a href="#">作品展览</a> --><a href="<?php echo $this->createUrl('admin/photo'); ?>">相册管理</a><a href="<?php echo $this->createUrl('admin/imusic'); ?>">我的音乐</a><a href="<?php echo $this->createUrl('admin/imv'); ?>">视频播客</a></dd>
+									<dd><a href="<?php echo $this->createUrl('admin/myinfo'); ?>" >基本信息</a><a href="<?php echo $this->createUrl('admin/editiface');?>">上传头像</a><!-- <a href="#">我的简历</a><a href="#">作品展览</a> --><a href="<?php echo $this->createUrl('admin/photo'); ?>">相册管理</a><a href="<?php echo $this->createUrl('admin/imusic'); ?>">我的音乐</a> <a href="<?php echo $this->createUrl('admin/imv'); ?>">视频播客</a></dd>
 								</dl>
 								
 								<dl class="sort" id='fontstyle'>

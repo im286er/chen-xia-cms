@@ -43,7 +43,7 @@
 		</tr>
 		<tr>
 			<td style="border:0;"></td>
-			<td style="border:0;"><input type="submit" name="" value="确认添加" id="" class="btn-img" /></td>
+			<td style="border:0;"><input type="submit" name="" value="确认更新" id="" class="btn-img" /></td>
 		</tr>
 		
 		</table>

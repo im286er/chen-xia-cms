@@ -2,9 +2,7 @@
 
 	class ArticleController extends Controller{
 		
-		//权限验证
 		public function filters(){
-			
 			return array(
 				'accessControl',
 			);
@@ -24,7 +22,7 @@
 			);
 		}
 		
-		//标签列表
+		//Lables List
 		public function actionLabels(){
 			
 			$criteria = new CDbCriteria();		//AR的另一种写法
@@ -40,7 +38,7 @@
 			$this->render('labels',$data);
 		}
 		
-		//添加新标签
+		//Add Lable
 		public function actionAddlabel(){
 			
 			$articleModel = new Article();
@@ -54,7 +52,7 @@
 				if($articleModel->validate()){
 					
 					if($articleModel->save()){
-						//Yii::app()->user->setFlash('success','添加标签成功。(⊙_⊙)');
+						//Yii::app()->user->setFlash('success','添加标签成功 :)');
 						$this->redirect(array('labels'));
 					}
 				}
@@ -62,7 +60,7 @@
 			$this->render("addlabel",array('articleModel'=>$articleModel));
 		}
 		
-		//修改标签
+		//Edit Label
 		public function actionEditlabel($id){
 			
 			$label = Article::model();
@@ -85,7 +83,7 @@
 		}
 		
 		
-		//删除标签
+		//Del Label
 		public function actionDellabel($id){
 			
 			$label = Article::model();
@@ -106,7 +104,7 @@
 			$this->render($view);
 		}
 		
-		//博文列表
+		//Blog List
 		public function actionArticles(){
 			
 			$uid = Yii::app()->session['uid'];
@@ -128,23 +126,11 @@
 			$data['blogs'] = $blogs;
 			$this->render('articles',$data);
 
-//			$criteria = new CDbCriteria();		//AR的另一种写法
-//			$criteria->condition = "userid=".Yii::app()->session['uid'];
-//			$blogs = new Blog();
-//			$total = $blogs->count($criteria);	//统计条数
-//			
-//			$pager = new CPagination($total);
-//			$pager->pageSize = 7;
-//			$pager->applyLimit($criteria);
-//			$blogs = $blogs->findAll($criteria);
-//			$data = array('pages'=>$pager,'blogs'=>$blogs);
-//			$this->render('articles',$data);
-
 		}
 		
 		
 		
-		//添加文章
+		//Add Blog
 		public function actionWrite(){
 			
 			$label = new Article();
@@ -156,10 +142,9 @@
 				$labesArray[$l->id] = $l->label;
 			}
 			
-			
 			$blog = Blog::model();
 			if(isset($_POST['Blog'])){
-
+			
 				$post = $_POST['Blog'];
 				$post['view'] = 0;
 				$post['time'] = time();
@@ -180,19 +165,12 @@
 						$blog->userid = Yii::app()->session['uid'];
 						$blog->save(FALSE);
 						Yii::app()->session['blogid'] = $blog->attributes['id'] ;
-		
+	
 					}
-					
-					/**
-					 * 处理图片
-					 * require_once 'UPimage/UPimage.php';		//图片缩略类
-					 * $resizeimage = new resizeimage("1.jpg", "320", "240", "1","2.jpg");
-					 */
 
 					Yii::import('application.vendors.*'); 
 					require_once 'Qiniu/io.php';				//七牛上传类
 					require_once 'Qiniu/rs.php';
-					
 
 					$images = "";								//拼接图片以@方式
 					if(CheckUploadFiles($_FILES['thumb'])){
@@ -205,8 +183,7 @@
 						$secretKey = Yii::app()->params['secretKey'];
 						
 						foreach ($file['name'] as $key=> $f){
-							if(empty($file['name'][$key]))		//为空循环下一次
-								continue;
+							if(empty($file['name'][$key])) {continue;}
 							if(ImageTypeCheck($file['name'][$key],$file['size'][$key])){
 								
 								$newname = time().rand(10000,99999).$type;
@@ -215,11 +192,10 @@
 								$upToken = $putPolicy->Token(null);
 								list($ret, $err) = Qiniu_Put($upToken, $newname, file_get_contents($file['tmp_name'][$key]), null);
 								
-								if($err === null) {	//成功
-								   	//$images .= "http://".Yii::app()->params['bucket'].".".Yii::app()->params['domain']."/".$newname."@";
+								if($err === null) {	//OK
 								  	$images .= $newname."@";
 									
-								}else {				//失败
+								}else {				//NO
 								   
 								}
 
@@ -233,9 +209,6 @@
 					$blog->attributes = $post;
 
 					if($blog->save()){
-						/**
-						 * 注销blogid
-						 */
 						Yii::app()->session['blogid'] = null;
 						Yii::app()->user->setFlash('sendblogsuccess','发布文章成功 :)');
 						$this->redirect(array('articles'));
@@ -251,9 +224,7 @@
 		}
 		
 		
-		
-		
-		//删除文章
+		//Del Blog
 		public function actionDelblog($id){
 			
 			$blogModel = Blog::model();
@@ -305,7 +276,7 @@
 		}
 		
 		
-		//查看文章
+		//Look Blog
 		public function actionIlookblog($bid){
 			
 			$url = "http://".Yii::app()->params['bucket'].".".Yii::app()->params['domain']."/";
@@ -323,7 +294,7 @@
 		}
 		
 		
-		//编辑文章
+		//Edit BLog
 		public function actionEditblog($id){
 		
 			$label = new Article();
@@ -406,7 +377,6 @@
 							}
 						}
 						
-						
 						//删除图片
 						$imgs = GetImageFileName($blogInfotmp->image);
 						
@@ -414,42 +384,20 @@
 						$client = new Qiniu_MacHttpClient(null);
 						
 						foreach ($imgs  as $i){
-							if(!isset($client))
-								$client = new Qiniu_MacHttpClient(null);
-								
+							if(!isset($client)) {$client = new Qiniu_MacHttpClient(null);}
 							$err = Qiniu_RS_Delete($client, $bucket, $i);
-							
 						}
 						
 					}else{								//没有上传图片 不做任何操作 保持原来的图片
-						
 						$images = $blogInfo->image;
-						
 					}
 					
 					//$post['image'] = $images;
 					$blogInfo->attributes = $post;
 					
-					//2
-					//删除文章文字配图 和业务数据库中的记录
-//					Qiniu_SetKeys($accessKey, $secretKey);
-//					$client = new Qiniu_MacHttpClient(null);
-//					$imgageModel = Image::model();
-//					$textImage = $imgageModel->findAll('blogid=:bid',array('bid'=>$id));
-//					foreach ($textImage as $ti){
-//						if(!isset($client))
-//								$client = new Qiniu_MacHttpClient(null);
-//								
-//							$err = Qiniu_RS_Delete($client, $bucket, $ti->image);
-//					}
-//					$imgageModel->deleteAll('blogid=:bid',array('bid'=>$id));
-					
 					$blogInfo->image = $images;
 					$blogInfo->content = $_POST['content'];
 					if($blogInfo->save()){
-						/**
-						 * 注销blogid	必须的
-						 */
 						Yii::app()->session['blogid'] = null;
 						Yii::app()->user->setFlash('sendblogsuccess','修改文章成功 :)');
 						$this->redirect(array('articles'));
@@ -467,80 +415,6 @@
 			
 		}
 		
-		
-		//文章评论
-		/*
-		public function actionComments($m){
-			
-			
-			$uid = Yii::app()->session['uid'];
-			$data['uid'] = $uid;
-			
-			$sql = "select b.id as bid,b.title as btitle,b.userid as uid,c.*,u.username from {{comment}} c,{{blog}} b,{{user}} as u where c.userid = $uid and u.id = c.cuid and c.blogid = b.id ";
-			switch ($m){
-				
-				case 2:
-					break;
-				case 1:
-					$sql .= " and c.isread = 1 ";
-					break;
-				case 0:
-					$sql .= " and c.isread = 0";
-					break;
-				
-			}
-			$order = " order by c.time desc ";
-			$sql .= $order;
-			
-			$criteria = new CDbCriteria;
-			$model= Yii::app()->db->createCommand($sql)->queryAll();
-
-			$pages = new CPagination(count($model));               
-			$pages->pageSize = 5;
-			$pages->applylimit($criteria);
-			
-			$model=Yii::app()->db->createCommand($sql." LIMIT :offset,:limit");
-			$model->bindValue(':offset', $pages->currentPage*$pages->pageSize);
-			$model->bindValue(':limit', $pages->pageSize);
-			$commentInfo=$model->queryAll();
-			
-			$data['pages'] = $pages;
-			$data['commentInfo'] = $commentInfo;
-			$this->render("comments",$data);
-			
-		}
-		*/
-		
-		//删除评论
-		/*
-		public function actionDelcomment($id){
-			
-			if(Comment::model()->deleteByPk($id)){
-				Yii::app()->user->setFlash('actiontsataus','YES，删除评论成功。');
-			}else{
-				Yii::app()->user->setFlash('actiontsataus','Sorry，系统错误，删除评论失败。');
-			}
-			$this->redirect(array('article/comments','m'=>2));
-		}
-		*/
-		
-		//标记评论已读
-		/*
-		public function actionMarkread($id){
-			
-			$commonModel = Comment::model();
-			$commonModel = $commonModel->findByPk($id);
-			$commonModel->isread = 1;
-			$commonModel->save(false);
-			$this->redirect(array('article/comments','m'=>2));
-		}
-		*/
-		
-		
-		
-		
-		
 	}
 	
-
 ?>

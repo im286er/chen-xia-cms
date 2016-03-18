@@ -15,7 +15,7 @@
 </div>
 	<table class="tablelist" width="100%">
 		<tr>
-			<th>ID</th><th>标题</th><th>栏目</th><th>发布时间</th><th>操作</th>
+			<th>ID</th><th>标题</th><th width=10%>栏目</th><th width=10%>发布时间</th><th width=10%>操作</th>
 		</tr>
 		<?php foreach ($blogs as $key => $b): ?>
 		<tr>

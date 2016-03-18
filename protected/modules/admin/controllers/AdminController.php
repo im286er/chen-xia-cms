@@ -2,15 +2,14 @@
 	
 	class AdminController extends Controller{
 	
-		//权限验证
+		//Acess Authorize
 		public function filters(){
-			
 			return array(
 				'accessControl',
 			);
 		}
 		public function accessRules(){
-			//'actions'=>array(),不写或空表示验证所有方法	
+			//'actions'=>array(),if empty it'll check all
 			return array(
 				array(
 					'allow',
@@ -25,12 +24,12 @@
 		}
 		
 		
-		//后台首页
+		//Backgourd Index
 		public function actionIndex(){
 			$this->render("home");
 		}
 		
-		//基本信息
+		//Base Information
 		public function actionMyinfo(){
 			
 			$userinfoModel = new Userinfo();
@@ -38,7 +37,7 @@
 			$this->render("myinfo",array('userinfo'=>$userInfo));
 		}
 		
-		//修改信息
+		//Edit Info
 		public function actionEditinfo(){
 			
 			$userinfoModel = new Userinfo();
@@ -65,7 +64,7 @@
 			$this->render("editinfo",$data);
 		}
 		
-		//修改密码
+		//Change Password
 		public function actionEditpass(){
 			
 			$userModel = new User();
@@ -77,7 +76,7 @@
 					$newpass = md5($_POST['User']['newpassword']);
 					if($userModel->updateByPk($userInfo->id, array('password'=>$newpass))){
 						
-						//保存闪存信息，前台打印
+						//Save Flash
 						Yii::app()->user->setFlash('success','修改密码成功。:)');
 					}
 					
@@ -88,7 +87,7 @@
 		
 		
 		
-		//网站配置
+		//Web Config
 		public function actionWebconfig(){
 			
 			$configModel = Config::model();
@@ -96,7 +95,7 @@
 			$this->render('webconfig',array('configs'=>$configInfo));
 		}
 		
-		//修改配置
+		//Edit Config
 		public function actionEditconfig($cid){
 			
 			$configModel = Config::model();
@@ -132,20 +131,21 @@
 							$upToken = $putPolicy->Token(null);
 							list($ret, $err) = Qiniu_Put($upToken, $newname, file_get_contents($file['tmp_name']), null);
 							
-							if($err === null) {	//成功
+							if($err === null) {	//ok
 							   	$images = "http://".Yii::app()->params['bucket'].".".Yii::app()->params['domain']."/".$newname;
 							  
-							}else {				//失败
+							}else {				//no
 							   
 							}
 						}
 						
-						//获取原图片并删除
+						//Get original Pic and Del
 						$icon = GetImageFileName($configInfotmp->icon);
-						Qiniu_SetKeys($accessKey, $secretKey);
-						$client = new Qiniu_MacHttpClient(null);
-						$err = Qiniu_RS_Delete($client, $bucket, $icon[0]);
-						
+						if (!empty($icon)) {
+							Qiniu_SetKeys($accessKey, $secretKey);
+							$client = new Qiniu_MacHttpClient(null);
+							$err = Qiniu_RS_Delete($client, $bucket, $icon[0]);
+						}
 						
 					}else{
 						
@@ -163,7 +163,6 @@
 				
 			}
 			
-			
 			$data = array(
 				'editModel'	=>	$configInfo,
 			);
@@ -172,14 +171,14 @@
 		}
 		
 		
-		//修改头像
+		//Edit Face
 		public function actionEditiface(){
 			
-			//交给assets中iface异步处理
+			//assets->iface异步处理
 			$this->render("iface");
 		}
 		
-		//菜单管理
+		//Menu Manage
 		public function actionWebmenu(){
 			
 			$menuModel = Menu::model();
@@ -190,7 +189,7 @@
 			$this->render("webmenu",$data);
 		}
 		
-		//添加菜单
+		//add Menu
 		public function actionAddmenu($pid){
 
 			$menuModel = new Menu();
@@ -213,7 +212,7 @@
 			$this->render("addmenu",$data);
 		}
 		
-		//删除菜单
+		//Del menu
 		public function actionDelmenu($id){
 			
 			$menuModel = new Menu();
@@ -226,7 +225,7 @@
 			}
 		}
 		
-		//编辑菜单
+		//Edit menu
 		public function actionEditmenu($id){
 			
 			$menuModel = Menu::model();
@@ -245,14 +244,14 @@
 			$this->render("editmenu",$data);
 		}
 		
-		//相册管理
+		//Photo Manage
 		public function actionPhoto(){
 			
 			
 			$criteria = new CDbCriteria();		//AR的另一种写法
 			$criteria->condition = "userid=".Yii::app()->session['uid'];
 			$photoModel = new Photo();
-			$total = $photoModel->count('userid=:uid',array('uid'=>Yii::app()->session['uid']),$criteria);	//统计条数
+			$total = $photoModel->count('userid=:uid',array('uid'=>Yii::app()->session['uid']),$criteria);	//count
 
 			$pager = new CPagination($total);
 			$pager->pageSize = 27;
@@ -271,13 +270,13 @@
 		}
 		
 		
-		//上传图片-->交给assets中CFUpload异步处理
+		//Upload Img-->assets中CFUpload异步处理
 		public function actionUpphoto(){
 			
 			$this->render("upphoto");
 		}
 		
-		//删除图片
+		//Del Pic
 		public function actionAjaxdelimage(){
 			
 			Yii::import('application.vendors.*'); 
@@ -299,7 +298,7 @@
 					
 			}
 			
-			//删除数据库中的记录
+			//Del in Db
 			if($photoModel->deleteByPk($id)){
 				echo 1;
 			}else{
@@ -308,7 +307,7 @@
 			
 		}
 		
-		//设置皮肤背景
+		//set Backgourd 
 		public function actionAjaxsetimage(){
 			
 			$id = $_POST['iid'];
@@ -321,13 +320,12 @@
 			$background = Yii::app()->db->createCommand($sql)->queryAll();
 			$url  = "http://".Yii::app()->params['bucket'].".".Yii::app()->params['domain']."/";
 			Yii::app()->session['ws_backgroundofuser'] = !empty($background[0]['picture'])?$url.$background[0]['picture']:null;
-			
 			echo "setbackgroundsuccessed";
 			
 		}
 		
 		
-		//音乐
+		//Music
 		public function actionImusic(){
 			
 			Createmusiclist();
@@ -340,7 +338,7 @@
 		}
 		
 		
-		//上传音乐
+		//Upload Music
 		public function actionUpmusic(){
 			
 			$songModel = New Song();
@@ -410,7 +408,7 @@
 		
 	
 		
-		//删除音乐
+		//Del Music
 		public function actionDelmusic($id){
 			
 			$songModel = New Song();
@@ -441,7 +439,7 @@
 		
 		
 		
-		//修改音乐
+		//Edit Music
 		public function actionEditmusic($id){
 			
 			$songModel = Song::model();
@@ -464,7 +462,7 @@
 		
 		
 		
-		//mv视频
+		//MV
 		public function actionImv(){
 			
 			$url = "http://".Yii::app()->params['bucket'].".".Yii::app()->params['domain']."/";
@@ -483,7 +481,7 @@
 		
 		
 		
-		//上传视频	-->	assets中swf/upload.php异步处理
+		//upload MV	-->	assets中swf/upload.php异步处理
 		public function actionUpmv(){
 			$data = array(
 				'flashUrl'	=>	Yii::app()->request->baseUrl."/assets/admin/swfupload/swfupload/swfupload.swf",
@@ -493,7 +491,7 @@
 		}
 		
 		
-		//编辑mv
+		//Edit Mv
 		public function actionEditmv($id){
 			
 			$mvModel = Mv::model();
@@ -517,7 +515,7 @@
 		}
 		
 		
-		//上传视频
+		//Del MV
 		public function actionDelmv($id){
 			
 			Yii::import('application.vendors.*'); 
@@ -538,7 +536,6 @@
 				
 			}
 			
-			
 			//上传业务数据库中数据
 			
 			if($mvModel->deleteByPk($id)){
@@ -551,7 +548,7 @@
 		}
 		
 		
-		//留言
+		//Leave a Message
 		public function actionMessage($m){
 			
 			$uid = Yii::app()->session['uid'];
@@ -591,7 +588,7 @@
 			
 		}
 		
-		//删除留言
+		//Del Message
 		public function actionDelmessage($id){
 
 			if(Contact::model()->deleteByPk($id)){
@@ -602,7 +599,7 @@
 			$this->redirect(array('admin/message','m'=>2));
 		}
 		
-		//标记留言已读
+		//Mark read Message
 		public function actionMarkread($id){
 			
 			$contactModel = Contact::model();
