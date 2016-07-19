@@ -1,5 +1,7 @@
 # chen-xia-cms
 a yii framework cms
+# describtion
+http://www.oschina.net/p/a-simple-cms
 # 安装与配置(本地)
 1.先下载项目解压至apache根目录
 2.cd 根目录/protected/config/main.php查找"数据库配置"并修改你的数据库配置信息；查找"七牛配置"修改你的七牛配置信息(ps:无七牛账户去www.qiniu.com注册)
