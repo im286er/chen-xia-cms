@@ -2,7 +2,7 @@
 a yii framework cms
 # describtion
 http://www.oschina.net/p/a-simple-cms
-# A Demo
+# a demo
 http://zhuwanxiong.hjwhp.ghco.info
 # 安装与配置(本地)
 1.先下载项目解压至apache根目录
