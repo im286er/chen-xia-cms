@@ -1,1 +1,0 @@
-<player><playlist></player></playlist>
