@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Istok Web';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Istok Web Regular'), local('IstokWeb-Regular'), url(./-SXnV4mZjf4oh1IBw13WZw.woff) format('woff');
+}
+@font-face {
+  font-family: 'Istok Web';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Istok Web Bold'), local('IstokWeb-Bold'), url(./-SXnV4mZjf4oh1IBw13WZw.woff) format('woff');
+}

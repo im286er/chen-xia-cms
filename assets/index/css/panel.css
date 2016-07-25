@@ -1,0 +1,50 @@
+.loadMore{
+	font-family:'微软雅黑';
+	display: none;
+    padding: 0px;
+	width:50px;
+	height:50px;
+	line-height:50px;
+	background-color:#E61736;
+    color: #fff;
+    font-size: 15px;
+    text-align: center;
+	-webkit-transform: translateZ(0);
+    position: fixed;
+    _position: absolute;
+    right: 10px;
+    bottom: 300px;
+    _bottom: "auto";
+    cursor: pointer;
+	border-radius:50px;
+    /*opacity: .6;
+    filter: Alpha(opacity=60);*/
+}
+.loadMore:hover{
+	background-color:#D1122E;
+}
+.panelMnu{
+	font-family:'微软雅黑';
+	display: none;
+    padding: 0px;
+	width:50px;
+	height:50px;
+	line-height:50px;
+	background-color:#E61736;
+    color: #fff;
+    font-size: 15px;
+    text-align: center;
+	-webkit-transform: translateZ(0);
+    position: fixed;
+    _position: absolute;
+    right: 10px;
+    bottom: 240px;
+    _bottom: "auto";
+    cursor: pointer;
+	border-radius:50px;
+    /*opacity: .6;
+    filter: Alpha(opacity=60);*/
+}
+.panelMnu:hover{
+	background-color:#D1122E;
+}
